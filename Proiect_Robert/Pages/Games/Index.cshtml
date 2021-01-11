@@ -1,0 +1,73 @@
+﻿@page
+@model Proiect_Robert.Pages.Games.IndexModel
+
+@{
+    ViewData["Title"] = "Jocuri video:";
+}
+
+<h1>Lista cu jocurile video:</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Game[0].ImageUrl)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Denumire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Genul)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].SiteUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Game[0].DataPublicarii)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Game) {
+        <tr>
+            <td>
+                @if (item.ImageUrl != null)
+                {
+                    <img src="@Url.Content(item.ImageUrl)" alt="Image" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Denumire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genul)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @*Html.DisplayFor(modelItem => item.SiteUrl)*@
+                <a href=@item.SiteUrl target="_blank">@item.Denumire</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPublicarii)
+            </td>
+
+
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
